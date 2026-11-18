@@ -1,0 +1,4568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1176</width>
+    <height>742</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Zeron Config</string>
+  </property>
+  <property name="styleSheet">
+   <string>
+/* ============================================
+   Modern Dark Theme — Single Accent
+   ============================================ */
+
+/* === Base === */
+QMainWindow, QWidget {
+    background-color: #121212;
+    color: #E0E0E0;
+    font-family: "IBM Plex Sans", "Helvetica Neue", "Segoe UI", sans-serif;
+    font-size: 13px;
+}
+
+/* === Typography === */
+QLabel {
+    color: #E0E0E0;
+    font-size: 13px;
+    background-color: transparent;
+}
+
+QLabel#mainPageTitle {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 600;
+    font-family: "Rajdhani", "IBM Plex Sans", sans-serif;
+}
+
+/* === List Widget === */
+QListWidget {
+    background-color: #1A1A1A;
+    color: #E0E0E0;
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+    padding: 6px;
+    font-size: 13px;
+}
+
+QListWidget::item {
+    padding: 10px 8px;
+    border-radius: 6px;
+    margin: 2px;
+}
+
+QListWidget::item:selected {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+}
+
+QListWidget::item:hover {
+    background-color: #232323;
+}
+
+/* === Buttons (Secondary Default) === */
+QPushButton {
+    background-color: #2A2A2A;
+    color: #E0E0E0;
+    border: 1px solid #333333;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+QPushButton:hover {
+    background-color: #363636;
+    border-color: #444444;
+}
+
+QPushButton:pressed {
+    background-color: #1E1E1E;
+}
+
+/* Danger — Stop Buttons */
+QPushButton#stopMacroButton {
+    background-color: #2A2A2A;
+    color: #E0E0E0;
+    border: 1px solid #333333;
+}
+
+QPushButton#stopMacroButton:hover {
+    background-color: #363636;
+}
+
+/* Webhook Toggle — disabled */
+QPushButton#webhookToggleButton {
+    background-color: #2A2A2A;
+    color: #999999;
+    border: 1px solid #333333;
+}
+
+QPushButton#webhookToggleButton:hover {
+    background-color: #363636;
+}
+
+/* Webhook Toggle — enabled */
+QPushButton#webhookToggleButton[enabled_state=&quot;true&quot;] {
+    background-color: #E0E0E0;
+    color: #ffffff;
+    border: none;
+}
+
+QPushButton#webhookToggleButton[enabled_state=&quot;true&quot;]:hover {
+    background-color: #34D76F;
+}
+
+/* Webhook Test */
+QPushButton#webhookTestButton {
+    background-color: #2A2A2A;
+    color: #E0E0E0;
+    border: 1px solid #333333;
+}
+
+QPushButton#webhookTestButton:hover {
+    background-color: #363636;
+}
+
+/* Overlay Webhook Toggle — disabled */
+QPushButton#overlayWebhookToggleButton {
+    background-color: #2A2A2A;
+    color: #999999;
+    border: 1px solid #333333;
+}
+
+QPushButton#overlayWebhookToggleButton:hover {
+    background-color: #363636;
+}
+
+/* Overlay Webhook Toggle — enabled */
+QPushButton#overlayWebhookToggleButton[enabled_state=&quot;true&quot;] {
+    background-color: #E0E0E0;
+    color: #ffffff;
+    border: none;
+}
+
+QPushButton#overlayWebhookToggleButton[enabled_state=&quot;true&quot;]:hover {
+    background-color: #34D76F;
+}
+
+/* Overlay Webhook Test */
+QPushButton#overlayWebhookTestButton {
+    background-color: #2A2A2A;
+    color: #E0E0E0;
+    border: 1px solid #333333;
+}
+
+QPushButton#overlayWebhookTestButton:hover {
+    background-color: #363636;
+}
+
+/* === Standard Group Box === */
+QGroupBox {
+    background-color: #1A1A1A;
+    border: 1px solid #2A2A2A;
+    border-top: 2px solid #3A3A3A;
+    border-radius: 8px;
+    margin-top: 16px;
+    padding: 12px;
+    padding-top: 14px;
+    font-weight: 500;
+    color: #E0E0E0;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    left: 12px;
+    padding: 2px 8px;
+    color: #E0E0E0;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: transparent;
+}
+
+/* Widgets inside group boxes */
+QGroupBox QLabel,
+QGroupBox QRadioButton,
+QGroupBox QCheckBox {
+    background-color: transparent;
+}
+
+/* === Overlay Page Background === */
+QWidget#overlayPage {
+    background-color: #0d0d0d;
+    font-family: "Inter", sans-serif;
+}
+
+/* === Overlay Mode Cards === */
+QGroupBox#storyModeGroup, QGroupBox#raidsModeGroup, QGroupBox#legendModeGroup,
+QGroupBox#bossRushModeGroup, QGroupBox#eventsModeGroup,
+QGroupBox#dungeonModeGroup {
+    background-color: #111111;
+    border: none;
+    border-radius: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+QGroupBox#storyModeGroup:hover, QGroupBox#raidsModeGroup:hover, QGroupBox#legendModeGroup:hover,
+QGroupBox#bossRushModeGroup:hover, QGroupBox#eventsModeGroup:hover,
+QGroupBox#dungeonModeGroup:hover {
+    border: none;
+}
+QGroupBox#storyModeGroup::title, QGroupBox#raidsModeGroup::title, QGroupBox#legendModeGroup::title,
+QGroupBox#bossRushModeGroup::title, QGroupBox#eventsModeGroup::title,
+QGroupBox#dungeonModeGroup::title {
+    width: 0px; height: 0px; padding: 0px; margin: 0px;
+}
+
+/* Overlay card combos */
+QGroupBox#storyModeGroup QComboBox, QGroupBox#raidsModeGroup QComboBox,
+QGroupBox#legendModeGroup QComboBox, QGroupBox#bossRushModeGroup QComboBox,
+QGroupBox#eventsModeGroup QComboBox,
+QGroupBox#dungeonModeGroup QComboBox {
+    background-color: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    color: #ccc;
+    padding: 4px 10px;
+    font-size: 12px;
+    combobox-popup: 0;
+}
+QGroupBox#storyModeGroup QComboBox QAbstractItemView,
+QGroupBox#raidsModeGroup QComboBox QAbstractItemView,
+QGroupBox#legendModeGroup QComboBox QAbstractItemView,
+QGroupBox#bossRushModeGroup QComboBox QAbstractItemView,
+QGroupBox#eventsModeGroup QComboBox QAbstractItemView,
+QGroupBox#dungeonModeGroup QComboBox QAbstractItemView {
+    background-color: #0a0a0a;
+    color: #E0E0E0;
+    selection-background-color: #1a1a1a;
+    selection-color: #ffffff;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    font-size: 12px;
+    padding: 2px;
+    outline: 0;
+}
+QGroupBox#storyModeGroup QComboBox QAbstractItemView::item,
+QGroupBox#raidsModeGroup QComboBox QAbstractItemView::item,
+QGroupBox#legendModeGroup QComboBox QAbstractItemView::item,
+QGroupBox#bossRushModeGroup QComboBox QAbstractItemView::item,
+QGroupBox#eventsModeGroup QComboBox QAbstractItemView::item,
+QGroupBox#dungeonModeGroup QComboBox QAbstractItemView::item {
+    padding: 3px 6px;
+    min-height: 16px;
+    background-color: #0a0a0a;
+    color: #E0E0E0;
+}
+QGroupBox#storyModeGroup QComboBox QAbstractItemView::item:selected,
+QGroupBox#raidsModeGroup QComboBox QAbstractItemView::item:selected,
+QGroupBox#legendModeGroup QComboBox QAbstractItemView::item:selected,
+QGroupBox#bossRushModeGroup QComboBox QAbstractItemView::item:selected,
+QGroupBox#eventsModeGroup QComboBox QAbstractItemView::item:selected,
+QGroupBox#dungeonModeGroup QComboBox QAbstractItemView::item:selected {
+    background-color: #1a1a1a;
+    color: #ffffff;
+}
+QGroupBox#storyModeGroup QComboBox QFrame,
+QGroupBox#raidsModeGroup QComboBox QFrame,
+QGroupBox#legendModeGroup QComboBox QFrame,
+QGroupBox#bossRushModeGroup QComboBox QFrame,
+QGroupBox#eventsModeGroup QComboBox QFrame,
+QGroupBox#dungeonModeGroup QComboBox QFrame {
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    background-color: #0a0a0a;
+}
+
+/* Overlay webhook group */
+QGroupBox#overlayWebhookGroup {
+    background-color: #111111;
+    border: 1px solid #1e1e1e;
+    border-radius: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+QGroupBox#overlayWebhookGroup::title {
+    width: 0px; height: 0px; padding: 0px; margin: 0px;
+}
+
+/* Overlay webhook input */
+QGroupBox#overlayWebhookGroup QLineEdit {
+    background-color: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+}
+
+/* === Inputs === */
+QLineEdit {
+    background-color: #1E1E1E;
+    color: #E0E0E0;
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+QLineEdit:focus {
+    border: 1px solid #808080;
+}
+
+QLineEdit:hover {
+    border: 1px solid #3A3A3A;
+}
+
+/* === Radio Buttons === */
+QRadioButton {
+    color: #E0E0E0;
+    font-size: 13px;
+    background-color: transparent;
+    spacing: 8px;
+}
+
+QRadioButton::indicator {
+    width: 16px;
+    height: 16px;
+}
+
+QRadioButton::indicator:unchecked {
+    border: 2px solid #3A3A3A;
+    border-radius: 8px;
+    background-color: #1E1E1E;
+}
+
+QRadioButton::indicator:unchecked:hover {
+    border-color: #E0E0E0;
+}
+
+QRadioButton::indicator:checked {
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    background-color: #E0E0E0;
+}
+
+/* === Checkboxes === */
+QCheckBox {
+    color: #E0E0E0;
+    font-size: 13px;
+    background-color: transparent;
+    spacing: 8px;
+}
+
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+}
+
+QCheckBox::indicator:unchecked {
+    border: 2px solid #3A3A3A;
+    border-radius: 4px;
+    background-color: #1E1E1E;
+}
+
+QCheckBox::indicator:unchecked:hover {
+    border-color: #E0E0E0;
+}
+
+QCheckBox::indicator:checked {
+    border: 2px solid #E0E0E0;
+    border-radius: 4px;
+    background-color: #E0E0E0;
+}
+
+/* === Separator Insert Buttons === */
+QPushButton#insertButton {
+    background-color: transparent;
+    color: #444444;
+    border: none;
+    font-weight: 600;
+    font-size: 10px;
+    padding: 0px;
+    border-radius: 3px;
+}
+
+QPushButton#insertButton:hover {
+    color: #E0E0E0;
+    background-color: #3A3A3A;
+}
+
+QPushButton#insertButton:pressed {
+    color: #22C55E;
+    background-color: #2A2A2A;
+}
+
+/* Cancel Insert */
+QPushButton#cancelInsertButton {
+    background-color: #FF4D4F;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+QPushButton#cancelInsertButton:hover {
+    background-color: #FF6B6B;
+}
+
+
+/* === Step Rows === */
+QWidget#stepRow {
+    background-color: transparent;
+    border: none;
+}
+
+/* Number badge */
+QLabel#stepNumBadge {
+    background-color: #0a0a0a;
+    color: #666666;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+/* Card container */
+QWidget#stepCard {
+    background-color: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+}
+
+/* Step type label — bold tracked caps */
+QLabel#stepTypeLabel {
+    background-color: transparent;
+    color: #FFFFFF;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2;
+}
+
+/* Detail / descriptor */
+QLabel#stepDetailLabel {
+    background-color: transparent;
+    color: #888888;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+/* Value chip */
+QLabel#stepValueLabel {
+    background-color: transparent;
+    color: #4EC9B0;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1;
+}
+
+QPushButton#inlineAddButton {
+    background-color: transparent;
+    color: #666666;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    font-size: 16px;
+    font-weight: 300;
+    padding: 0px;
+    padding-bottom: 2px;
+    margin: 0px;
+}
+QPushButton#inlineAddButton:hover {
+    color: #10b981;
+    border-color: #10b981;
+}
+
+QPushButton#editStepButton {
+    background-color: transparent;
+    color: #666666;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 0px;
+    padding-bottom: 1px;
+    margin: 0px;
+}
+QPushButton#editStepButton:hover {
+    color: #E0E0E0;
+    border-color: #555555;
+}
+
+QPushButton#deleteStepButton {
+    background-color: transparent;
+    color: #c72e2e;
+    border: 1px solid #c72e2e;
+    border-radius: 0px;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 0px;
+    padding-bottom: 2px;
+    margin: 0px;
+}
+QPushButton#deleteStepButton:hover {
+    color: #FF4D4F;
+    border-color: #FF4D4F;
+    background-color: rgba(199, 46, 46, 0.1);
+}
+
+/* === Separator Widget States === */
+QWidget#separator {
+    background-color: transparent;
+}
+
+QWidget#separator[active=&quot;true&quot;] {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid #808080;
+    border-radius: 4px;
+}
+
+/* === Group Box Highlight (Edit Mode) === */
+QGroupBox[highlighted=&quot;true&quot;] {
+    border: 2px solid #E0E0E0;
+}
+
+/* === Scroll Area === */
+QScrollArea {
+    background-color: #1A1A1A;
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+}
+
+QScrollArea &gt; QWidget &gt; QWidget {
+    background-color: #1A1A1A;
+}
+
+QScrollBar:vertical {
+    background-color: #1A1A1A;
+    width: 8px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #333333;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #444444;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    height: 0px;
+}
+
+/* === Status Bar === */
+QStatusBar {
+    background-color: #000000;
+    color: #999999;
+    border-top: 1px solid #2A2A2A;
+    font-size: 12px;
+}
+
+/* === Menu Bar === */
+QMenuBar {
+    background-color: #1A1A1A;
+    color: #E0E0E0;
+}
+
+/* === Combo Box === */
+QComboBox {
+    background-color: #1E1E1E;
+    color: #E0E0E0;
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+QComboBox:hover {
+    border-color: #3A3A3A;
+}
+
+QComboBox:focus {
+    border-color: #E0E0E0;
+}
+
+QComboBox::drop-down {
+    border: none;
+    background-color: transparent;
+    width: 25px;
+}
+
+QComboBox::down-arrow {
+    image: url(references/down_arrow.svg);
+    width: 10px;
+    height: 6px;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #1A1A1A;
+    color: #E0E0E0;
+    selection-background-color: rgba(255, 255, 255, 0.06);
+    selection-color: #ffffff;
+    border: 1px solid #2A2A2A;
+    border-radius: 0px;
+    font-size: 10px;
+    padding: 2px;
+    outline: 0;
+}
+
+QComboBox QAbstractItemView::item {
+    padding: 3px 6px;
+    min-height: 16px;
+    background-color: #1A1A1A;
+    color: #E0E0E0;
+}
+
+QComboBox QAbstractItemView::item:selected {
+    background-color: #2A2A2A;
+    color: #ffffff;
+}
+
+/* Remove white frame around combo popup */
+QComboBox QFrame {
+    border: 1px solid #2A2A2A;
+    border-radius: 0px;
+    background-color: #1A1A1A;
+}
+
+/* === Advanced section compact combos/inputs === */
+QGroupBox#upgradeGroup QComboBox {
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 0px;
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    color: #E0E0E0;
+    combobox-popup: 0;
+}
+QGroupBox#placeGroup QComboBox {
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 0px;
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    color: #E0E0E0;
+    combobox-popup: 0;
+}
+
+QGroupBox#upgradeGroup QComboBox QAbstractItemView,
+QGroupBox#placeGroup QComboBox QAbstractItemView {
+    background-color: #0a0a0a;
+    color: #E0E0E0;
+    selection-background-color: #1a1a1a;
+    selection-color: #ffffff;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    font-size: 10px;
+    padding: 2px;
+    outline: 0;
+}
+
+QGroupBox#advancedClickGroup QComboBox,
+QGroupBox#advancedKeyGroup QComboBox {
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+
+QGroupBox#upgradeGroup QLineEdit,
+QGroupBox#placeGroup QLineEdit {
+    font-family: "Menlo", "SF Mono", monospace;
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 0px;
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    color: #E0E0E0;
+}
+
+QGroupBox#advancedWaitGroup QLineEdit {
+    font-family: "Menlo", "SF Mono", monospace;
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 0px;
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    color: #E0E0E0;
+}
+
+QGroupBox#advancedClickGroup QLineEdit,
+QGroupBox#advancedKeyGroup QLineEdit {
+    font-family: "Menlo", "SF Mono", monospace;
+    font-size: 10px;
+    padding: 1px 4px;
+    border-radius: 0px;
+    background-color: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    color: #E0E0E0;
+}
+
+QGroupBox#advancedKeyGroup QRadioButton,
+QGroupBox#advancedClickGroup QRadioButton {
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    spacing: 6px;
+}
+QGroupBox#advancedKeyGroup QRadioButton::indicator,
+QGroupBox#advancedClickGroup QRadioButton::indicator {
+    width: 12px;
+    height: 12px;
+}
+QGroupBox#advancedKeyGroup QRadioButton::indicator:unchecked,
+QGroupBox#advancedClickGroup QRadioButton::indicator:unchecked {
+    border: 1px solid #3A3A3A;
+    border-radius: 0px;
+    background-color: #0a0a0a;
+}
+QGroupBox#advancedKeyGroup QRadioButton::indicator:unchecked:hover,
+QGroupBox#advancedClickGroup QRadioButton::indicator:unchecked:hover {
+    border-color: #10b981;
+}
+QGroupBox#advancedKeyGroup QRadioButton::indicator:checked,
+QGroupBox#advancedClickGroup QRadioButton::indicator:checked {
+    border: 1px solid #10b981;
+    border-radius: 0px;
+    background-color: #10b981;
+    image: url(references/checkmark.svg);
+}
+
+/* === Wait group radio buttons (redesigned) === */
+QGroupBox#advancedWaitGroup QRadioButton {
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    spacing: 6px;
+}
+
+QGroupBox#advancedWaitGroup QRadioButton::indicator {
+    width: 12px;
+    height: 12px;
+}
+
+QGroupBox#advancedWaitGroup QRadioButton::indicator:unchecked {
+    border: 1px solid #3A3A3A;
+    border-radius: 0px;
+    background-color: #0a0a0a;
+}
+
+QGroupBox#advancedWaitGroup QRadioButton::indicator:unchecked:hover {
+    border-color: #10b981;
+}
+
+QGroupBox#advancedWaitGroup QRadioButton::indicator:checked {
+    border: 1px solid #10b981;
+    border-radius: 0px;
+    background-color: #10b981;
+    image: url(references/checkmark.svg);
+}
+
+
+QGroupBox#unitSelectionGroup QLineEdit {
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 0px;
+    background-color: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    color: #E0E0E0;
+}
+
+QGroupBox#upgradeGroup QCheckBox {
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    spacing: 6px;
+}
+QGroupBox#placeGroup QCheckBox {
+    font-size: 10px;
+    spacing: 6px;
+}
+
+QGroupBox#upgradeGroup QCheckBox::indicator,
+QGroupBox#placeGroup QCheckBox::indicator {
+    width: 12px;
+    height: 12px;
+}
+
+QGroupBox#upgradeGroup QCheckBox::indicator:unchecked,
+QGroupBox#placeGroup QCheckBox::indicator:unchecked {
+    border: 1px solid #3A3A3A;
+    border-radius: 0px;
+    background-color: #0a0a0a;
+}
+
+QGroupBox#upgradeGroup QCheckBox::indicator:unchecked:hover,
+QGroupBox#placeGroup QCheckBox::indicator:unchecked:hover {
+    border-color: #10b981;
+}
+
+QGroupBox#upgradeGroup QCheckBox::indicator:checked,
+QGroupBox#placeGroup QCheckBox::indicator:checked {
+    border: 1px solid #10b981;
+    border-radius: 0px;
+    background-color: #10b981;
+    image: url(references/checkmark.svg);
+}
+
+/* === Unit Group Boxes === */
+QGroupBox#unit1Group, QGroupBox#unit2Group, QGroupBox#unit3Group,
+QGroupBox#unit4Group, QGroupBox#unit5Group, QGroupBox#unit6Group {
+    background-color: transparent;
+    border: none;
+    border-radius: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+
+QGroupBox#unit1Group::title, QGroupBox#unit2Group::title, QGroupBox#unit3Group::title,
+QGroupBox#unit4Group::title, QGroupBox#unit5Group::title, QGroupBox#unit6Group::title {
+    width: 0px;
+    height: 0px;
+}
+
+/* === Upgrade Section === */
+QGroupBox#upgradeGroup {
+    background-color: #000000;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+
+QGroupBox#upgradeGroup::title {
+    width: 0px;
+    height: 0px;
+}
+
+/* === Place Section === */
+QGroupBox#placeGroup {
+    background-color: #000000;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+
+QGroupBox#placeGroup::title {
+    width: 0px;
+    height: 0px;
+}
+
+/* === Group Header Labels === */
+QLabel#clickHeaderLabel,
+QLabel#keyHeaderLabel {
+    background-color: transparent;
+    color: #888888;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2;
+    padding-left: 10px;
+    border-bottom: 1px solid #2a2a2a;
+    border-radius: 0px;
+}
+QLabel#settingsHeaderLabel {
+    background-color: transparent;
+    color: #888888;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2;
+    padding-left: 10px;
+    border-bottom: 1px solid #2a2a2a;
+    border-radius: 0px;
+}
+
+QLabel#waitHeaderLabel {
+    background-color: transparent;
+    color: #888888;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2;
+    padding-left: 10px;
+    border-bottom: 1px solid #2a2a2a;
+    border-radius: 0px;
+}
+
+/* === Upgrade/Place/Units Header Labels (dark redesign) === */
+QLabel#upgradeHeaderLabel,
+QLabel#unitSelectionHeaderLabel {
+    background-color: transparent;
+    color: #888888;
+    font-family: "Inter", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2;
+    padding-left: 10px;
+    border-bottom: 1px solid #2a2a2a;
+    border-radius: 0px;
+}
+QLabel#placeHeaderLabel {
+    background-color: transparent;
+    color: #888888;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2;
+    padding-left: 10px;
+    border-bottom: 1px solid #2a2a2a;
+    border-radius: 0px;
+}
+
+/* === Unit N: labels (inline with inputs) === */
+QLabel#unit1HeaderLabel, QLabel#unit2HeaderLabel, QLabel#unit3HeaderLabel,
+QLabel#unit4HeaderLabel, QLabel#unit5HeaderLabel, QLabel#unit6HeaderLabel {
+    background-color: transparent;
+    color: #888888;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0;
+    padding-left: 0px;
+    border-radius: 0px;
+}
+
+/* === All labels in upgrade group use Inter === */
+QGroupBox#upgradeGroup QLabel {
+    font-family: "Inter", sans-serif;
+}
+
+/* === Column header labels in upgrade/place groups === */
+QLabel#upgradeUnitLabel,
+QLabel#upgradePlacementLabel,
+QLabel#upgradeCountLabel {
+    color: #555555;
+    font-family: "Inter", sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1;
+    background-color: transparent;
+}
+QLabel#placeUnitLabel,
+QLabel#placeXLabel,
+QLabel#placeYLabel,
+QLabel#placementColHeaderLabel {
+    color: #555555;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1;
+    background-color: transparent;
+}
+
+/* === Add Upgrade Step button (green, full-width) === */
+QPushButton#addUpgradeStepButton {
+    background-color: #10b981;
+    color: #000000;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2;
+    border: none;
+    border-radius: 0px;
+}
+QPushButton#addUpgradeStepButton:hover {
+    background-color: #0ea472;
+}
+QPushButton#addUpgradeStepButton:pressed {
+    background-color: #0d9668;
+}
+
+/* === Add Place Step button (green) === */
+QPushButton#addPlaceStepButton {
+    background-color: #10b981;
+    color: #000000;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1;
+    border: none;
+    border-radius: 0px;
+}
+QPushButton#addPlaceStepButton:hover {
+    background-color: #0ea472;
+}
+
+/* === Record Place Click button (dark secondary) === */
+QPushButton#recordPlaceClickButton {
+    background-color: #0a0a0a;
+    color: #C0C0C0;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1;
+    border: 1px solid #333333;
+    border-radius: 0px;
+}
+QPushButton#recordPlaceClickButton:hover {
+    background-color: #2E2E2E;
+    color: #E0E0E0;
+    border-color: #444444;
+}
+
+/* === Add Wait Step button (green, redesigned) === */
+QPushButton#addAdvancedWaitButton {
+    background-color: #10b981;
+    color: #000000;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2;
+    border: none;
+    border-radius: 0px;
+}
+QPushButton#addAdvancedWaitButton:hover {
+    background-color: #0ea472;
+}
+QPushButton#addAdvancedWaitButton:pressed {
+    background-color: #0d9668;
+}
+
+/* === Click / Key add buttons (green) === */
+QPushButton#addAdvancedClickButton,
+QPushButton#addAdvancedKeyButton {
+    background-color: #10b981;
+    color: #000000;
+    font-family: "Inter", "IBM Plex Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2;
+    border: none;
+    border-radius: 0px;
+}
+QPushButton#addAdvancedClickButton:hover,
+QPushButton#addAdvancedKeyButton:hover {
+    background-color: #0ea472;
+}
+QPushButton#addAdvancedClickButton:pressed,
+QPushButton#addAdvancedKeyButton:pressed {
+    background-color: #0d9668;
+}
+/* === Record Click button (dark) === */
+QPushButton#advRecordClickButton {
+    background-color: #1a1a1a;
+    color: #C0C0C0;
+    font-family: "Inter", "IBM Plex Sans", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1;
+    border: 1px solid #333333;
+    border-radius: 0px;
+}
+QPushButton#advRecordClickButton:hover {
+    background-color: #2E2E2E;
+    color: #E0E0E0;
+    border-color: #444444;
+}
+
+/* === Save / Clear / Back buttons (Advanced Create) === */
+QPushButton#advancedSaveButton {
+    background-color: #10b981;
+    color: #000000;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2;
+    border: none;
+    border-radius: 0px;
+}
+QPushButton#advancedSaveButton:hover {
+    background-color: #0ea472;
+}
+QPushButton#advancedSaveButton:pressed {
+    background-color: #0d9668;
+}
+QPushButton#advancedClearButton {
+    background-color: #0a0a0a;
+    color: #888888;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+}
+QPushButton#advancedClearButton:hover {
+    background-color: #1a1a1a;
+    color: #CCCCCC;
+    border-color: #444444;
+}
+QPushButton#advBackButton {
+    background-color: #0a0a0a;
+    color: #888888;
+    font-family: "Inter", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+}
+QPushButton#advBackButton:hover {
+    background-color: #1a1a1a;
+    color: #CCCCCC;
+    border-color: #444444;
+}
+
+/* === Unit Selection === */
+QGroupBox#unitSelectionGroup {
+    background-color: #000000;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+QGroupBox#unitSelectionGroup::title { width: 0px; height: 0px; }
+
+/* === Advanced Steps Scroll Area === */
+QScrollArea#advancedStepsScrollArea {
+    background-color: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+}
+
+/* === Wait Section === */
+QGroupBox#advancedWaitGroup {
+    background-color: #000000;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+QGroupBox#advancedWaitGroup::title { width: 0px; height: 0px; }
+
+/* === Click Group (Raw Steps) === */
+QGroupBox#advancedClickGroup {
+    background-color: #000000;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+QGroupBox#advancedClickGroup::title { width: 0px; height: 0px; }
+
+/* === Key Group (Raw Steps) === */
+QGroupBox#advancedKeyGroup {
+    background-color: #000000;
+    border: 1px solid #2a2a2a;
+    border-radius: 0px;
+    margin-top: 0px;
+    padding: 0px;
+}
+QGroupBox#advancedKeyGroup::title { width: 0px; height: 0px; }
+
+   </string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>1221</width>
+      <height>671</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="overlayPage">
+     <widget class="QScrollArea" name="overlayScrollArea">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1470</width>
+        <height>865</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAsNeeded</enum>
+      </property>
+      <property name="widgetResizable">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string>QScrollArea { background-color: #0d0d0d; border: none; } QWidget#overlayContent { background-color: #0d0d0d; }</string>
+      </property>
+      <widget class="QWidget" name="overlayContent">
+       <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>1468</width>
+        <height>1320</height>
+       </rect>
+      </property>
+     <widget class="QLabel" name="overlayPageTitle">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>12</y>
+        <width>1470</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>font-size: 28px; font-weight: 700; color: #ffffff; font-family: "Inter", sans-serif; background: transparent;</string>
+      </property>
+      <property name="text">
+       <string>Zeron Config</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignHCenter|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="overlaySubtitle">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>44</y>
+        <width>1470</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>font-size: 11px; color: #444444; letter-spacing: 2px; font-weight: 600; background: transparent; font-family: "Inter", sans-serif;</string>
+      </property>
+      <property name="text">
+       <string>0 OF 6 MACROS CONFIGURED</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignHCenter|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="overlayStatusLabel">
+      <property name="geometry">
+       <rect>
+        <x>1300</x>
+        <y>15</y>
+        <width>150</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>color: #666666; font-size: 15px; font-weight: 700; background: transparent; font-family: "Rajdhani", "Inter", sans-serif; letter-spacing: 0.5px;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="storyModeGroup">
+      <property name="geometry">
+       <rect>
+        <x>26</x>
+        <y>75</y>
+        <width>455</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QFrame" name="storyImageFrame">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>border: none; background-repeat: no-repeat; background-position: center;</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="storyImageOverlay">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(17,17,17,0), stop:0.4 rgba(17,17,17,30), stop:0.7 rgba(17,17,17,160), stop:1 rgba(17,17,17,255)); border: none;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="storyModeLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>10</y>
+         <width>80</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #999; font-size: 10px; font-weight: 700; letter-spacing: 2px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>STORY</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="storyActiveLabel">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>10</y>
+         <width>80</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #10b981; font-size: 10px; font-weight: 700; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="storyMapLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>180</y>
+         <width>60</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>MAP</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="storyMacroLabel">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>180</y>
+         <width>120</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="storyMapCombo">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>196</y>
+         <width>209</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="storyMacroCombo">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>196</y>
+         <width>208</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="storyRunsLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">RUNS&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="storyTotalLabel">
+       <property name="geometry">
+        <rect>
+         <x>121</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TOTAL&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="storyTimeLabel">
+       <property name="geometry">
+        <rect>
+         <x>335</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TIME&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0m 0s&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="storyCreateMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #10b981; color: #000; font-weight: 700; font-size: 11px; border: none; border-radius: 0px; letter-spacing: 1px;</string>
+       </property>
+       <property name="text">
+        <string>CREATE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="storyImportMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>232</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>IMPORT MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="storySelectMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>314</y>
+         <width>427</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>SELECT MACRO</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="raidsModeGroup">
+      <property name="geometry">
+       <rect>
+        <x>507</x>
+        <y>75</y>
+        <width>455</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QFrame" name="raidsImageFrame">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>border: none; background-repeat: no-repeat; background-position: center;</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="raidsImageOverlay">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(17,17,17,0), stop:0.4 rgba(17,17,17,30), stop:0.7 rgba(17,17,17,160), stop:1 rgba(17,17,17,255)); border: none;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="raidsModeLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>10</y>
+         <width>80</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #999; font-size: 10px; font-weight: 700; letter-spacing: 2px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>RAIDS</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="raidsActiveLabel">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>10</y>
+         <width>80</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #10b981; font-size: 10px; font-weight: 700; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="raidsMapLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>180</y>
+         <width>60</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>MAP</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="raidsMacroLabel">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>180</y>
+         <width>120</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="raidsMapCombo">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>196</y>
+         <width>209</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="raidsMacroCombo">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>196</y>
+         <width>208</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="raidsRunsLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">RUNS&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="raidsTotalLabel">
+       <property name="geometry">
+        <rect>
+         <x>121</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TOTAL&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="raidsTimeLabel">
+       <property name="geometry">
+        <rect>
+         <x>335</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TIME&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0m 0s&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="raidsCreateMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #10b981; color: #000; font-weight: 700; font-size: 11px; border: none; border-radius: 0px; letter-spacing: 1px;</string>
+       </property>
+       <property name="text">
+        <string>CREATE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="raidsImportMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>232</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>IMPORT MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="raidsSelectMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>314</y>
+         <width>427</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>SELECT MACRO</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="legendModeGroup">
+      <property name="geometry">
+       <rect>
+        <x>988</x>
+        <y>75</y>
+        <width>455</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QFrame" name="legendImageFrame">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>border: none; background-repeat: no-repeat; background-position: center;</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="legendImageOverlay">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(17,17,17,0), stop:0.4 rgba(17,17,17,30), stop:0.7 rgba(17,17,17,160), stop:1 rgba(17,17,17,255)); border: none;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="legendModeLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>10</y>
+         <width>120</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #999; font-size: 10px; font-weight: 700; letter-spacing: 2px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>LEGEND STAGE</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="legendActiveLabel">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>10</y>
+         <width>80</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #10b981; font-size: 10px; font-weight: 700; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="legendMapLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>180</y>
+         <width>60</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>MAP</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="legendMacroLabel">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>180</y>
+         <width>120</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="legendMapCombo">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>196</y>
+         <width>209</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="legendMacroCombo">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>196</y>
+         <width>208</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="legendRunsLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">RUNS&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="legendTotalLabel">
+       <property name="geometry">
+        <rect>
+         <x>121</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TOTAL&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="legendTimeLabel">
+       <property name="geometry">
+        <rect>
+         <x>335</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TIME&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0m 0s&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="legendCreateMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #10b981; color: #000; font-weight: 700; font-size: 11px; border: none; border-radius: 0px; letter-spacing: 1px;</string>
+       </property>
+       <property name="text">
+        <string>CREATE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="legendImportMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>232</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>IMPORT MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="legendSelectMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>314</y>
+         <width>427</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>SELECT MACRO</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="bossRushModeGroup">
+      <property name="geometry">
+       <rect>
+        <x>26</x>
+        <y>430</y>
+        <width>455</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QFrame" name="bossRushImageFrame">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>border: none; background-repeat: no-repeat; background-position: center;</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="bossRushImageOverlay">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(17,17,17,0), stop:0.4 rgba(17,17,17,30), stop:0.7 rgba(17,17,17,160), stop:1 rgba(17,17,17,255)); border: none;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="bossRushModeLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>10</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #999; font-size: 10px; font-weight: 700; letter-spacing: 2px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>BOSS RUSH</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="bossRushActiveLabel">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>10</y>
+         <width>80</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #10b981; font-size: 10px; font-weight: 700; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="bossRushMapLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>180</y>
+         <width>60</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>MAP</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="bossRushMacroLabel">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>180</y>
+         <width>120</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="bossRushMapCombo">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>196</y>
+         <width>209</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="bossRushMacroCombo">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>196</y>
+         <width>208</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="bossRushRunsLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">RUNS&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="bossRushTotalLabel">
+       <property name="geometry">
+        <rect>
+         <x>121</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TOTAL&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="bossRushTimeLabel">
+       <property name="geometry">
+        <rect>
+         <x>335</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TIME&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0m 0s&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="bossRushCreateMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #10b981; color: #000; font-weight: 700; font-size: 11px; border: none; border-radius: 0px; letter-spacing: 1px;</string>
+       </property>
+       <property name="text">
+        <string>CREATE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="bossRushImportMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>232</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>IMPORT MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="bossRushSelectMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>314</y>
+         <width>427</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>SELECT MACRO</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="eventsModeGroup">
+      <property name="geometry">
+       <rect>
+        <x>507</x>
+        <y>430</y>
+        <width>455</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QFrame" name="eventsImageFrame">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>border: none; background-repeat: no-repeat; background-position: center;</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="eventsImageOverlay">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(17,17,17,0), stop:0.4 rgba(17,17,17,30), stop:0.7 rgba(17,17,17,160), stop:1 rgba(17,17,17,255)); border: none;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="eventsModeLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>10</y>
+         <width>80</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #999; font-size: 10px; font-weight: 700; letter-spacing: 2px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>EVENTS</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="eventsActiveLabel">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>10</y>
+         <width>80</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #10b981; font-size: 10px; font-weight: 700; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="eventsMapLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>180</y>
+         <width>60</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>MAP</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="eventsMacroLabel">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>180</y>
+         <width>120</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="eventsMapCombo">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>196</y>
+         <width>209</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="eventsMacroCombo">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>196</y>
+         <width>208</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="eventsRunsLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">RUNS&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="eventsTotalLabel">
+       <property name="geometry">
+        <rect>
+         <x>121</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TOTAL&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="eventsTimeLabel">
+       <property name="geometry">
+        <rect>
+         <x>335</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TIME&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0m 0s&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="eventsCreateMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #10b981; color: #000; font-weight: 700; font-size: 11px; border: none; border-radius: 0px; letter-spacing: 1px;</string>
+       </property>
+       <property name="text">
+        <string>CREATE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="eventsImportMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>232</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>IMPORT MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="eventsSelectMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>314</y>
+         <width>427</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>SELECT MACRO</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="dungeonModeGroup">
+      <property name="geometry">
+       <rect>
+        <x>988</x>
+        <y>430</y>
+        <width>455</width>
+        <height>340</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QFrame" name="dungeonImageFrame">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>border: none; background-repeat: no-repeat; background-position: center;</string>
+       </property>
+      </widget>
+      <widget class="QFrame" name="dungeonImageOverlay">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>455</width>
+         <height>160</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 rgba(17,17,17,0), stop:0.4 rgba(17,17,17,30), stop:0.7 rgba(17,17,17,160), stop:1 rgba(17,17,17,255)); border: none;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="dungeonModeLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>10</y>
+         <width>100</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #999; font-size: 10px; font-weight: 700; letter-spacing: 2px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>DUNGEONS</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="dungeonActiveLabel">
+       <property name="geometry">
+        <rect>
+         <x>360</x>
+         <y>10</y>
+         <width>80</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #10b981; font-size: 10px; font-weight: 700; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="dungeonMapLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>180</y>
+         <width>60</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>MAP</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="dungeonMacroLabel">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>180</y>
+         <width>120</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 9px; font-weight: 600; letter-spacing: 1px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>ACTIVE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="dungeonMapCombo">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>196</y>
+         <width>209</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="dungeonMacroCombo">
+       <property name="geometry">
+        <rect>
+         <x>233</x>
+         <y>196</y>
+         <width>208</width>
+         <height>30</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="dungeonRunsLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">RUNS&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="dungeonTotalLabel">
+       <property name="geometry">
+        <rect>
+         <x>121</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TOTAL&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QLabel" name="dungeonTimeLabel">
+       <property name="geometry">
+        <rect>
+         <x>335</x>
+         <y>240</y>
+         <width>107</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>&lt;span style="color:#555;font-size:9px;font-weight:600;letter-spacing:1px;">TIME&lt;/span>&lt;br>&lt;span style="color:#fff;font-size:14px;font-weight:600;font-family:'Menlo','SF Mono',monospace;">0m 0s&lt;/span></string>
+       </property>
+       <property name="textFormat">
+        <enum>Qt::RichText</enum>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="dungeonCreateMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #10b981; color: #000; font-weight: 700; font-size: 11px; border: none; border-radius: 0px; letter-spacing: 1px;</string>
+       </property>
+       <property name="text">
+        <string>CREATE MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="dungeonImportMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>232</x>
+         <y>284</y>
+         <width>209</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>IMPORT MACRO</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="dungeonSelectMacroButton">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>314</y>
+         <width>427</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; font-size: 11px; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+       </property>
+       <property name="text">
+        <string>SELECT MACRO</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="overlayWebhookGroup">
+      <property name="geometry">
+       <rect>
+        <x>26</x>
+        <y>785</y>
+        <width>1418</width>
+        <height>55</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="overlayWebhookLabel">
+       <property name="geometry">
+        <rect>
+         <x>14</x>
+         <y>14</y>
+         <width>90</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #555; font-size: 10px; font-weight: 700; letter-spacing: 2px; background: transparent;</string>
+       </property>
+       <property name="text">
+        <string>WEBHOOK</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="overlayWebhookToggleButton">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>14</y>
+         <width>80</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; border: 1px solid #2a2a2a; border-radius: 0px; font-size: 11px;</string>
+       </property>
+       <property name="text">
+        <string>Disabled</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="overlayWebhookUrlInput">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>14</y>
+         <width>1100</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #ccc; border: 1px solid #2a2a2a; border-radius: 0px; padding: 4px 10px; font-size: 11px;</string>
+       </property>
+       <property name="placeholderText">
+        <string>Enter Discord webhook URL...</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="overlayWebhookTestButton">
+       <property name="geometry">
+        <rect>
+         <x>1310</x>
+         <y>14</y>
+         <width>96</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>background: #0a0a0a; color: #999; border: 1px solid #2a2a2a; border-radius: 0px; font-size: 11px;</string>
+       </property>
+       <property name="text">
+        <string>Test</string>
+       </property>
+      </widget>
+     </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page">
+     <widget class="QLabel" name="mainPageTitle">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>10</y>
+        <width>200</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>-1</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+     <property name="text">
+       <string>Saved Macros</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="mainStatusLabel">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>10</y>
+        <width>160</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>color: #666666; font-size: 15px; font-weight: 700; background: transparent; font-family: "Space Mono", "Menlo", monospace; letter-spacing: 0.5px;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="macroList">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>50</y>
+        <width>300</width>
+        <height>400</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="stopMacroButton">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>420</y>
+        <width>180</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stop Macro</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="advancedCreateButton">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>50</y>
+        <width>180</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: #2A2A2A; color: #E0E0E0; border: 1px solid #333333;</string>
+      </property>
+      <property name="text">
+       <string>Advanced Create</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="editAdvancedButton">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>100</y>
+        <width>180</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: #2A2A2A; color: #E0E0E0; border: 1px solid #333333;</string>
+      </property>
+      <property name="text">
+       <string>Edit Advanced Macro</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="webhookGroup">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>470</y>
+        <width>630</width>
+        <height>70</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Discord Webhook</string>
+      </property>
+      <widget class="QPushButton" name="webhookToggleButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>28</y>
+         <width>100</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Disabled</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="webhookUrlInput">
+       <property name="geometry">
+        <rect>
+         <x>120</x>
+         <y>28</y>
+         <width>420</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>Enter Discord webhook URL...</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="webhookTestButton">
+       <property name="geometry">
+        <rect>
+         <x>550</x>
+         <y>28</y>
+         <width>70</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Test</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="advancedCreatePage">
+     <widget class="QFrame" name="rightPanelBackground">
+      <property name="geometry">
+       <rect>
+        <x>1200</x>
+        <y>0</y>
+        <width>270</width>
+        <height>630</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: #000000; border: none;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+     </widget>
+     <widget class="QWidget" name="advTrafficLightBar">
+      <property name="geometry">
+       <rect>
+        <x>1200</x>
+        <y>0</y>
+        <width>68</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: #000000;</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="advancedStepsLabel">
+      <property name="geometry">
+       <rect>
+        <x>1200</x>
+        <y>0</y>
+        <width>249</width>
+        <height>35</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>color: #888888; font-family: "Inter", sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2; background-color: #000000; border-bottom: 1px solid #2a2a2a;</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="text">
+       <string>MACRO STEPS</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="advCloseButton">
+      <property name="geometry">
+       <rect>
+        <x>1452</x>
+        <y>11</y>
+        <width>13</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: #FF5F57; border-radius: 6px; border: none; padding: 0px;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QScrollArea" name="advancedStepsScrollArea">
+      <property name="geometry">
+       <rect>
+        <x>1200</x>
+        <y>35</y>
+        <width>269</width>
+        <height>510</height>
+       </rect>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="advancedStepsScrollContent">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>267</width>
+         <height>558</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabContentBackground">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>628</y>
+        <width>820</width>
+        <height>242</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: #0a0a0a;</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="unitSelectionGroup">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>668</y>
+        <width>788</width>
+        <height>160</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="unitSelectionHeaderLabel">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>788</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>UNITS</string>
+       </property>
+      </widget>
+      <widget class="QGroupBox" name="unit1Group">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>38</y>
+         <width>245</width>
+         <height>52</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QLabel" name="unit1HeaderLabel">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>5</y>
+          <width>55</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Unit 1:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="unit1NameInput">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>3</y>
+          <width>185</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Enter Unit</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit1CoordsLabel">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>32</y>
+          <width>150</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #555555; font-family: "Menlo", "SF Mono", monospace; font-size: 10px; font-weight: 500; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string>X: 512  Y: 822</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit1SavedLabel">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>32</y>
+          <width>50</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #22C55E; font-size: 9px; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="unit2Group">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>38</y>
+         <width>245</width>
+         <height>52</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QLabel" name="unit2HeaderLabel">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>5</y>
+          <width>55</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Unit 2:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="unit2NameInput">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>3</y>
+          <width>185</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Enter Unit</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit2CoordsLabel">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>32</y>
+          <width>150</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #555555; font-family: "Menlo", "SF Mono", monospace; font-size: 10px; font-weight: 500; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string>X: 602  Y: 825</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit2SavedLabel">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>32</y>
+          <width>50</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #22C55E; font-size: 9px; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="unit3Group">
+       <property name="geometry">
+        <rect>
+         <x>525</x>
+         <y>38</y>
+         <width>245</width>
+         <height>52</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QLabel" name="unit3HeaderLabel">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>5</y>
+          <width>55</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Unit 3:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="unit3NameInput">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>3</y>
+          <width>185</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Enter Unit</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit3CoordsLabel">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>32</y>
+          <width>150</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #555555; font-family: "Menlo", "SF Mono", monospace; font-size: 10px; font-weight: 500; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string>X: 681  Y: 821</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit3SavedLabel">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>32</y>
+          <width>50</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #22C55E; font-size: 9px; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="unit4Group">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>98</y>
+         <width>245</width>
+         <height>52</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QLabel" name="unit4HeaderLabel">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>5</y>
+          <width>55</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Unit 4:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="unit4NameInput">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>3</y>
+          <width>185</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Enter Unit</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit4CoordsLabel">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>32</y>
+          <width>150</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #555555; font-family: "Menlo", "SF Mono", monospace; font-size: 10px; font-weight: 500; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string>X: 782  Y: 825</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit4SavedLabel">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>32</y>
+          <width>50</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #22C55E; font-size: 9px; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="unit5Group">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>98</y>
+         <width>245</width>
+         <height>52</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QLabel" name="unit5HeaderLabel">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>5</y>
+          <width>55</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Unit 5:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="unit5NameInput">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>3</y>
+          <width>185</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Enter Unit</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit5CoordsLabel">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>32</y>
+          <width>150</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #555555; font-family: "Menlo", "SF Mono", monospace; font-size: 10px; font-weight: 500; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string>X: 868  Y: 821</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit5SavedLabel">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>32</y>
+          <width>50</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #22C55E; font-size: 9px; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QGroupBox" name="unit6Group">
+       <property name="geometry">
+        <rect>
+         <x>525</x>
+         <y>98</y>
+         <width>245</width>
+         <height>52</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string/>
+       </property>
+       <widget class="QLabel" name="unit6HeaderLabel">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>5</y>
+          <width>55</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Unit 6:</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="unit6NameInput">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>3</y>
+          <width>185</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="placeholderText">
+         <string>Enter Unit</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit6CoordsLabel">
+        <property name="geometry">
+         <rect>
+          <x>55</x>
+          <y>32</y>
+          <width>150</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #555555; font-family: "Menlo", "SF Mono", monospace; font-size: 10px; font-weight: 500; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string>X: 953  Y: 825</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="unit6SavedLabel">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>32</y>
+          <width>50</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: #22C55E; font-size: 9px; background-color: transparent;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="upgradeGroup">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>668</y>
+        <width>336</width>
+        <height>152</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="upgradeHeaderLabel">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>336</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>↻  UNIT UPGRADE</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="upgradeUnitLabel">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>38</y>
+         <width>150</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>UNIT</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="upgradeUnitCombo">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>52</y>
+         <width>150</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="upgradePlacementLabel">
+       <property name="geometry">
+        <rect>
+         <x>168</x>
+         <y>38</y>
+         <width>155</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>PLACEMENT</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="upgradePlacementCombo">
+       <property name="geometry">
+        <rect>
+         <x>168</x>
+         <y>52</y>
+         <width>155</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="upgradeCountLabel">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>78</y>
+         <width>60</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>UPGRADES</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="upgradeCountInput">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>90</y>
+         <width>60</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>1</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="autoUpgradeCheckBox">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>92</y>
+         <width>110</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Auto Upgrade</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="upgradeNoPlacementsLabel">
+       <property name="geometry">
+        <rect>
+         <x>195</x>
+         <y>92</y>
+         <width>125</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string>color: #FF4D4F; font-size: 10px; background-color: transparent;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="addUpgradeStepButton">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>114</y>
+         <width>312</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string/>
+       </property>
+       <property name="text">
+        <string>Add Upgrade Step</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="placeGroup">
+      <property name="geometry">
+       <rect>
+        <x>361</x>
+        <y>668</y>
+        <width>435</width>
+        <height>152</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="placeHeaderLabel">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>435</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>+  UNIT PLACE</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="placeUnitLabel">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>38</y>
+         <width>100</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>UNIT</string>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="placeUnitCombo">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>52</y>
+         <width>100</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="placementColHeaderLabel">
+       <property name="geometry">
+        <rect>
+         <x>118</x>
+         <y>38</y>
+         <width>90</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>PLACEMENT</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="placementCounterLabel">
+       <property name="geometry">
+        <rect>
+         <x>118</x>
+         <y>52</y>
+         <width>90</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #AAAAAA; font-family: "Menlo", "SF Mono", monospace; font-size: 14px; font-weight: 600; background-color: transparent; qproperty-alignment: AlignCenter;</string>
+       </property>
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="placeXLabel">
+       <property name="geometry">
+        <rect>
+         <x>214</x>
+         <y>38</y>
+         <width>75</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>X</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="placeXInput">
+       <property name="geometry">
+        <rect>
+         <x>214</x>
+         <y>52</y>
+         <width>75</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="placeYLabel">
+       <property name="geometry">
+        <rect>
+         <x>295</x>
+         <y>38</y>
+         <width>75</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Y</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="placeYInput">
+       <property name="geometry">
+        <rect>
+         <x>295</x>
+         <y>52</y>
+         <width>75</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="placeUntilEmptyCheckbox">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>84</y>
+         <width>130</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Place until empty</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="addPlaceStepButton">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>112</y>
+         <width>197</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string/>
+       </property>
+       <property name="text">
+        <string>Add Place Step</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="recordPlaceClickButton">
+       <property name="geometry">
+        <rect>
+         <x>215</x>
+         <y>112</y>
+         <width>198</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string/>
+       </property>
+       <property name="text">
+        <string>Record Click</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="advancedWaitGroup">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>668</y>
+        <width>500</width>
+        <height>138</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="waitHeaderLabel">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>500</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>WAIT</string>
+       </property>
+      </widget>
+      <!-- Row 1 Left: Wait for Seconds -->
+      <widget class="QRadioButton" name="advancedWaitSecondsRadio">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>40</y>
+         <width>120</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Wait for Seconds</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="advancedWaitSecondsInput">
+       <property name="geometry">
+        <rect>
+         <x>135</x>
+         <y>40</y>
+         <width>50</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>1.0</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="advancedWaitSecondsLabel">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>42</y>
+         <width>25</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-family: "Inter", sans-serif; font-size: 10px; color: #555555; background-color: transparent;</string>
+       </property>
+       <property name="text">
+        <string>SEC</string>
+       </property>
+      </widget>
+      <!-- Row 1 Right: Round Completed + Wave input -->
+      <widget class="QRadioButton" name="advancedWaitRoundRadio">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>40</y>
+         <width>125</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Round Completed</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="advancedWaveLabel">
+       <property name="geometry">
+        <rect>
+         <x>380</x>
+         <y>42</y>
+         <width>35</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-family: "Inter", sans-serif; font-size: 10px; color: #555555; background-color: transparent;</string>
+       </property>
+       <property name="text">
+        <string>Wave</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="advancedWaveInput">
+       <property name="geometry">
+        <rect>
+         <x>418</x>
+         <y>40</y>
+         <width>50</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
+      </widget>
+      <!-- Row 2 Left: Wait for Yen -->
+      <widget class="QRadioButton" name="advancedWaitYenRadio">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>70</y>
+         <width>120</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Wait for Yen &gt;=</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="advancedWaitYenInput">
+       <property name="geometry">
+        <rect>
+         <x>135</x>
+         <y>70</y>
+         <width>50</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>1000</string>
+       </property>
+      </widget>
+      <!-- Row 2 Right: Wait for Game Start -->
+      <widget class="QRadioButton" name="advancedWaitGameRadio">
+       <property name="geometry">
+        <rect>
+         <x>250</x>
+         <y>70</y>
+         <width>160</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Wait for Game Start</string>
+       </property>
+      </widget>
+      <!-- Green button -->
+      <widget class="QPushButton" name="addAdvancedWaitButton">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>100</y>
+         <width>476</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Add Wait Step</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="advancedSaveButton">
+      <property name="geometry">
+       <rect>
+        <x>1207</x>
+        <y>550</y>
+        <width>255</width>
+        <height>36</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string/>
+      </property>
+      <property name="text">
+       <string>⬡   SAVE MACRO</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="advancedClearButton">
+      <property name="geometry">
+       <rect>
+        <x>1207</x>
+        <y>592</y>
+        <width>123</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string/>
+      </property>
+      <property name="text">
+       <string>↺   CLEAR STEPS</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="advBackButton">
+      <property name="geometry">
+       <rect>
+        <x>1338</x>
+        <y>592</y>
+        <width>124</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>←   BACK</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="tabUnitsButton">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>630</y>
+        <width>164</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: transparent; color: #E0E0E0; border: none; border-bottom: 2px solid #5B8DEF; border-radius: 0px; font-size: 11px; font-weight: bold; letter-spacing: 1;</string>
+      </property>
+      <property name="text">
+       <string>UNITS</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="tabPlaceUpgradeButton">
+      <property name="geometry">
+       <rect>
+        <x>164</x>
+        <y>630</y>
+        <width>164</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: transparent; color: #666666; border: none; border-bottom: 2px solid transparent; border-radius: 0px; font-size: 11px; font-weight: bold; letter-spacing: 1;</string>
+      </property>
+      <property name="text">
+       <string>PLACE / UPGRADE</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="tabWaitButton">
+      <property name="geometry">
+       <rect>
+        <x>328</x>
+        <y>630</y>
+        <width>164</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: transparent; color: #666666; border: none; border-bottom: 2px solid transparent; border-radius: 0px; font-size: 11px; font-weight: bold; letter-spacing: 1;</string>
+      </property>
+      <property name="text">
+       <string>WAIT</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="tabRawStepsButton">
+      <property name="geometry">
+       <rect>
+        <x>492</x>
+        <y>630</y>
+        <width>164</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: transparent; color: #666666; border: none; border-bottom: 2px solid transparent; border-radius: 0px; font-size: 11px; font-weight: bold; letter-spacing: 1;</string>
+      </property>
+      <property name="text">
+       <string>RAW STEPS</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="tabSettingsButton">
+      <property name="geometry">
+       <rect>
+        <x>656</x>
+        <y>630</y>
+        <width>164</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: transparent; color: #666666; border: none; border-bottom: 2px solid transparent; border-radius: 0px; font-size: 11px; font-weight: bold; letter-spacing: 1;</string>
+      </property>
+      <property name="text">
+       <string>SETTINGS</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="runStopBackground">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>630</y>
+        <width>380</width>
+        <height>204</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: #0a0a0a; border: none;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="advRunMacroButton">
+      <property name="geometry">
+       <rect>
+        <x>828</x>
+        <y>639</y>
+        <width>176</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Start Macro (Ctrl+S)</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="advStopMacroButton">
+      <property name="geometry">
+       <rect>
+        <x>1012</x>
+        <y>639</y>
+        <width>180</width>
+        <height>34</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stop Macro (Ctrl+P)</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="advLogTextArea">
+      <property name="geometry">
+       <rect>
+        <x>828</x>
+        <y>679</y>
+        <width>364</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QFrame" name="reservedBottomRight">
+      <property name="geometry">
+       <rect>
+        <x>1200</x>
+        <y>630</y>
+        <width>270</width>
+        <height>230</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: #0a0a0a; border: 1px solid #2a2a2a; border-radius: 0px;</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="advancedClickGroup">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>668</y>
+        <width>390</width>
+        <height>152</height>
+       </rect>
+      </property>
+      <property name="visible">
+       <bool>false</bool>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="clickHeaderLabel">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>390</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>CLICK</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="advClickXLabel">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>38</y>
+         <width>14</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #555555; font-family: "Inter", sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1; background-color: transparent;</string>
+       </property>
+       <property name="text">
+        <string>X</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="advClickXInput">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>54</y>
+         <width>180</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="advClickYLabel">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>38</y>
+         <width>14</width>
+         <height>14</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #555555; font-family: "Inter", sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1; background-color: transparent;</string>
+       </property>
+       <property name="text">
+        <string>Y</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="advClickYInput">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>54</y>
+         <width>178</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>0</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="advRecordClickButton">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>90</y>
+         <width>180</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>RECORD CLICK</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="addAdvancedClickButton">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>90</y>
+         <width>178</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ADD CLICK STEP</string>
+       </property>
+      </widget>
+     </widget>
+    <widget class="QGroupBox" name="advancedKeyGroup">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>668</y>
+        <width>390</width>
+        <height>152</height>
+       </rect>
+      </property>
+      <property name="visible">
+       <bool>false</bool>
+      </property>
+      <property name="title">
+       <string/>
+      </property>
+      <widget class="QLabel" name="keyHeaderLabel">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>390</width>
+         <height>30</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>KEY PRESS</string>
+       </property>
+      </widget>
+      <!-- Press Key row -->
+      <widget class="QRadioButton" name="advKeyPressRadio">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>46</y>
+         <width>90</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Press Key</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="advKeyTimesLabel">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>34</y>
+         <width>40</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #555555; font-family: "Inter", sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1; background-color: transparent;</string>
+       </property>
+       <property name="text">
+        <string>TIMES</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="advKeyTimesInput">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>46</y>
+         <width>80</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>1</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="advKeyPressKeyLabel">
+       <property name="geometry">
+        <rect>
+         <x>295</x>
+         <y>34</y>
+         <width>28</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #555555; font-family: "Inter", sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1; background-color: transparent;</string>
+       </property>
+       <property name="text">
+        <string>KEY</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="advKeyInput">
+       <property name="geometry">
+        <rect>
+         <x>295</x>
+         <y>46</y>
+         <width>80</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>t</string>
+       </property>
+      </widget>
+      <!-- Hold Key row -->
+      <widget class="QRadioButton" name="advKeyHoldRadio">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>82</y>
+         <width>100</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Hold Key for:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="advKeyHoldSecLabel">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>70</y>
+         <width>28</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #555555; font-family: "Inter", sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1; background-color: transparent;</string>
+       </property>
+       <property name="text">
+        <string>SEC</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="advKeyHoldInput">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>82</y>
+         <width>80</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>1</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="advKeyHoldKeyLabel">
+       <property name="geometry">
+        <rect>
+         <x>295</x>
+         <y>70</y>
+         <width>28</width>
+         <height>12</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: #555555; font-family: "Inter", sans-serif; font-size: 9px; font-weight: 700; letter-spacing: 1; background-color: transparent;</string>
+       </property>
+       <property name="text">
+        <string>KEY</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="advKeyHoldKeyInput">
+       <property name="geometry">
+        <rect>
+         <x>295</x>
+         <y>82</y>
+         <width>80</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="placeholderText">
+        <string>t</string>
+       </property>
+      </widget>
+      <!-- Green button -->
+      <widget class="QPushButton" name="addAdvancedKeyButton">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>112</y>
+         <width>366</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ADD KEY STEP</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="licensePage">
+     <widget class="QLabel" name="licenseTitleLabel">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>180</y>
+        <width>800</width>
+        <height>30</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>color: #E0E0E0; font-size: 18px; font-weight: 600; font-family: "Inter", sans-serif; background: transparent;</string>
+      </property>
+      <property name="text">
+       <string>Enter License Key</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignHCenter|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="licenseKeyInput">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>236</y>
+        <width>300</width>
+        <height>42</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>background-color: #1A1A1A; color: #E0E0E0; border: 1px solid #2A2A2A; border-radius: 6px; padding: 10px; font-size: 14px; font-family: "Menlo", "SF Mono", monospace;</string>
+      </property>
+      <property name="placeholderText">
+       <string>AV-XXXX-XXXX-XXXX</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="licenseErrorLabel">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>288</y>
+        <width>400</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>color: #FF4D4F; font-size: 12px; font-family: "Inter", sans-serif; background: transparent;</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignHCenter|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="licenseValidateButton">
+      <property name="geometry">
+       <rect>
+        <x>250</x>
+        <y>324</y>
+        <width>300</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string>QPushButton { background-color: #22C55E; color: #ffffff; border: none; border-radius: 6px; padding: 10px; font-size: 14px; font-weight: 600; font-family: "Inter", sans-serif; } QPushButton:hover { background-color: #16A34A; } QPushButton:pressed { background-color: #15803D; }</string>
+      </property>
+      <property name="text">
+       <string>Validate Key</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1176</width>
+     <height>37</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

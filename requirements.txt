@@ -1,0 +1,21 @@
+PySide6==6.10.1
+pyautogui==0.9.54
+pillow==10.1.0
+opencv-python==4.8.1.78
+numpy<2
+pyperclip==1.8.2
+requests==2.31.0
+chardet==5.2.0
+pynput==1.7.6
+mss==10.1.0
+
+# Lightweight OCR backend for end-of-run reward amount parsing
+rapidocr==3.7.0
+onnxruntime==1.24.4
+
+# macOS runtime APIs used for Roblox window bounds and the Skele King jam flow
+pyobjc-core==12.1
+pyobjc-framework-Cocoa==12.1
+pyobjc-framework-Quartz==12.1
+pyobjc-framework-ScreenCaptureKit==12.1
+pyobjc-framework-libdispatch==12.1

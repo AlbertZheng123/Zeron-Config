@@ -1,0 +1,38 @@
+# Python environments and caches
+.venv/
+venv/
+.release-venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.nuitka-cache/
+.coverage
+htmlcov/
+
+# Distribution outputs
+build/
+dist/
+deployment/
+*.app/
+*.zip
+*.dmg
+
+# Local data and credentials
+.env
+.env.*
+!.env.example
+.zeron_user_data/
+runtime_output/
+.anime_vanguards_key
+valid_keys.py
+*.log
+*.p12
+*.pfx
+*.key
+
+# Local tools and OS files
+.DS_Store
+.idea/
+.claude/
